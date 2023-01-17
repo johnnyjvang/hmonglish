@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .card {
@@ -30,9 +31,6 @@
     height: 400px;
 }
 
-.flashcard_container{
-
-}
 
 .card_container{
   display: flex;
