@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
 }
 
 body {
@@ -22,12 +23,14 @@ body {
 .column {
     margin: 10px;
     background-color: green;
+    color: black;
     min-width: 300px;
     height: 200px;
     border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 40px;
 }
 
 .outside {
@@ -48,6 +51,7 @@ body {
   .column:hover {
     transform: scale(1.05);
     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+    opacity: 80%;
   }
   .column {
     transition: 0.5s ease;

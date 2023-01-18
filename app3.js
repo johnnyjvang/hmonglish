@@ -88,8 +88,8 @@ var btn = document.getElementsByClassName("myBtn");
 var flashcards = document.getElementsByClassName("flashcard");
 var flashcard_containers = document.getElementsByClassName("flashcard_container")[0];
 
-
-
+var match = document.getElementsByClassName("match");
+var quiz = document.getElementsByClassName("quiz");
 
 
 for (let i = 0; i < btn.length; i++) {
@@ -109,10 +109,20 @@ for (let i = 0; i < btn.length; i++) {
         for (let z = 0; z < flashcards.length; z++) {
           flashcards[z].onclick = function() {
               create_card_sound(running_flashcard, "white");
+              card_function();
               outside.classList.add("display_hide");
               modal.style.display = "none";
             //   flashcard_containers.classList.remove("display_hide")
-            }
+          }
+
+          match[z].onclick = function() {
+            alert("Match Game Coming Soon");
+          //   flashcard_containers.classList.remove("display_hide")
+          }
+          quiz[z].onclick = function() {
+            alert("Quiz Game Coming Soon");
+          //   flashcard_containers.classList.remove("display_hide")
+          }
         }
       }
   }
@@ -123,8 +133,14 @@ for (let i = 0; i < btn.length; i++) {
 function create_card(category_list, hmong_type) {
 
   let flashcard_start = '<div class="flashcard_container"><div class="w3-container flex_center">';
-  let flashcard_category = '<h2>' + category_list.flashcard_name + '</h2>';
-  let flashcard_middle = '<div><button id="unhide_btn" class="white_button">White</button><button id="unhide_btn" class="green_button opacity_50">Green</button></div></div>';
+  let flashcard_category = '<h3>' + category_list.flashcard_name + '</h3>';
+  let flashcard_middle =""
+  if (hmong_type == "white") {
+    flashcard_middle = '<div><button id="unhide_btn" class="white_button">White</button><button id="unhide_btn" class="green_button opacity_50">Green</button></div></div>';;
+  }
+  else{
+    flashcard_middle = '<div><button id="unhide_btn" class="white_button opacity_50">White</button><button id="unhide_btn" class="green_button">Green</button></div></div>';;
+  }
 
   let total_container_start = '<div class="w3-content card_container">';
   let all_card_str = '';
@@ -140,13 +156,13 @@ function create_card(category_list, hmong_type) {
     let word_container = '<div class="container">';
     let hmong_word = ''
     if (hmong_type == "white") {
-      hmong_word = '<h4><b>' + category_list.white[i] + '</b></h4>';
+      hmong_word = '<h1><b>' + category_list.white[i] + '</b></h1>';
     }
     else{
-      hmong_word = '<h4><b>' + category_list.green[i] + '</b></h4>';
+      hmong_word = '<h1><b>' + category_list.green[i] + '</b></h1>';
     }
 
-    let english_word = '<p>' + category_list.english[i] + '</p>';
+    let english_word = '<h3>' + category_list.english[i] + '</h3>';
     let end_str = '</div></div>';
     let running_card_str =  card_container + image_card + word_container + hmong_word + english_word + end_str;
 
@@ -159,7 +175,7 @@ function create_card(category_list, hmong_type) {
 
   }
   let flashcard_str = flashcard_start + flashcard_category + flashcard_middle
-  let ending_slide_str = '<button id="back" class="back">Back Button</button></div></div>'
+  let ending_slide_str = '<br><button id="back" class="back">Back Button</button></div></div>'
   let total_slide_str = slide_intro + running_slide_buttons + ending_slide_str
   
   let total_container_end = '</div>'
@@ -188,9 +204,15 @@ function create_card_sound(category_list, hmong_type){
     // console.log('category does not exist')
     document.querySelector(".outside").insertAdjacentHTML('afterend', card_str);
   }
-  console.log(card_str)
-  create_sound(category_list, hmong_type)
+
+  console.log(card_str);
+  create_sound(category_list, hmong_type);
   showDivs(slideIndex);
+  card_function();
+}
+
+
+function card_function() {
   // Get the button that opens the modal
   var white_button = document.getElementsByClassName("white_button")[0];
   var green_button = document.getElementsByClassName("green_button")[0];
@@ -200,17 +222,13 @@ function create_card_sound(category_list, hmong_type){
   // When the user clicks the button, open the modal 
   white_button.onclick = function() {
     create_card_sound(running_flashcard, "white");
-    white_button.classList.remove("opacity_50");
-    green_button.classList.add("opacity_50");
     console.log('clicked white button')
     showDivs(slideIndex);
   }
 
   green_button.onclick = function() {
-    white_button.classList.add("opacity_50");
-    green_button.classList.remove("opacity_50");
-    console.log('clicked green button')
     create_card_sound(running_flashcard, "green");
+    console.log('clicked green button')
     showDivs(slideIndex);
   }
 
@@ -222,45 +240,9 @@ function create_card_sound(category_list, hmong_type){
     } else {
     // console.log('category does not exist')
     }
-    }
+  }
 }
 
-if (document.querySelector(".w3-flashcard_container")) {
-    // console.log('category already exist');
-    var white_button = document.getElementsByClassName("white_button")[0];
-    var green_button = document.getElementsByClassName("green_button")[0];
-    var outside = document.getElementsByClassName("outside")[0];
-    
-    var back_button = document.getElementById("back");
-    // When the user clicks the button, open the modal 
-    white_button.onclick = function() {
-      create_card_sound(running_flashcard, "white");
-      white_button.classList.remove("opacity_50");
-      green_button.classList.add("opacity_50");
-      console.log('clicked white button')
-      showDivs(slideIndex);
-    }
-    
-    green_button.onclick = function() {
-      white_button.classList.add("opacity_50");
-      green_button.classList.remove("opacity_50");
-      console.log('clicked green button')
-      create_card_sound(running_flashcard, "green");
-      showDivs(slideIndex);
-    }
-    
-    back_button.onclick = function() {
-      if (document.querySelector(".flashcard_container")) {
-      // console.log('category already exist');
-      remove_category("flashcard_container")
-      outside.classList.remove("display_hide");
-      } else {
-      // console.log('category does not exist')
-      }
-      }
-} else {
-// console.log('category does not exist')
-}
 
 
 
