@@ -145,7 +145,7 @@ function create_card(category_list, hmong_type) {
   let total_container_start = '<div class="w3-content card_container">';
   let all_card_str = '';
 
-  let slide_intro = '<div class="w3-center"><div class="w3-section"><button class="w3-button w3-light-grey" onclick="plusDivs(-1)">❮ Prev</button><button class="w3-button w3-light-grey" onclick="plusDivs(1)">Next ❯</button></div>'
+  let slide_intro = '<div class="w3-center"><div class="w3-section"><button class="w3-button w3-light-grey prev_next_buttons" onclick="plusDivs(-1)">❮ Prev</button><button class="w3-button w3-light-grey prev_next_buttons" onclick="plusDivs(1)">Next ❯</button></div>'
 
   let running_slide_buttons = ''
 
