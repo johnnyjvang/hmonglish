@@ -416,3 +416,40 @@ function handleTouchMove(evt) {
     }
                                         
 };
+
+
+
+
+const delta = 6;
+let startX;
+let startY;
+
+document.addEventListener('mousedown', function (event) {
+  startX = event.pageX;
+  startY = event.pageY;
+});
+
+document.addEventListener('mouseup', function (event) {
+  const diffX = Math.abs(event.pageX - startX);
+  const diffY = Math.abs(event.pageY - startY);
+
+  if ((diffX > delta) && (event.pageX - startX) > 0) {
+    // Click!
+    if (enable_code == 1 && page_card == 1) {
+      plusDivs(1)
+    }
+    
+    console.log("drag right")
+  } 
+  
+  if ((diffX > delta) && (event.pageX - startX) < 0) {
+    // Click!
+    if (enable_code == 1 && page_card == 1) {
+      plusDivs(-1)
+    }
+    console.log("drag left")
+  }
+  
+});
+
+
