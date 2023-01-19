@@ -359,14 +359,60 @@ function keyAction(key) {
 
 
 
-function buttonAnimation(currentKey) {
+document.addEventListener('touchstart', handleTouchStart, false);        
+document.addEventListener('touchmove', handleTouchMove, false);
 
-  var activeButton = document.querySelector("." + currentKey);
+var xDown = null;                                                        
+var yDown = null;
 
-  activeButton.classList.add("pressed");
+function getTouches(evt) {
+  return evt.touches ||             // browser API
+         evt.originalEvent.touches; // jQuery
+}                                                     
+                                                                         
+function handleTouchStart(evt) {
+    if (enable_code == 1 && page_card == 1) {
+      const firstTouch = getTouches(evt)[0];                                      
+      xDown = firstTouch.clientX;                                      
+      yDown = firstTouch.clientY; 
+    }
+                                     
+};                                                
+                                                                         
+function handleTouchMove(evt) {
+    if (enable_code == 1 && page_card == 1) {
+      if ( ! xDown || ! yDown ) {
+        return;
+      }
 
-  setTimeout(function() {
-    activeButton.classList.remove("pressed");
-  }, 100);
+      var xUp = evt.touches[0].clientX;                                    
+      var yUp = evt.touches[0].clientY;
 
-}
+      var xDiff = xDown - xUp;
+      var yDiff = yDown - yUp;
+                                                                          
+      if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+          if ( xDiff > 0 ) {
+              plusDivs(-1)
+              console.log("swipe left")
+          } else {
+              /* left swipe */
+              plusDivs(1)
+              console.log("swipe right")
+
+          }                       
+      } else {
+          if ( yDiff > 0 ) {
+              /* down swipe */ 
+              console.log("swipe up")
+          } else {
+              /* up swipe */
+              console.log("swipe down")
+          }                                                                 
+      }
+      /* reset values */
+      xDown = null;
+      yDown = null;     
+    }
+                                        
+};
