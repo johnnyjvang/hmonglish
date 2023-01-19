@@ -8,7 +8,8 @@ if (document.querySelector(".flashcard_container")) {
   // console.log('category does not exist')
 }
 
-let running_flashcard = {}
+var running_flashcard = {};
+var hmong_color = "";
 
 let animals = {
   english:["bear", "bull", "cat", "chicken", "cow", "deer", "duck", "elephant", "fox", "goat", "hen", "horse", "lion", "monkey"],
@@ -77,6 +78,15 @@ function create_sound(category_list, hmong_type) {
        // console.log(audio_link)
       voice_recording.play();
     });
+
+    document.querySelectorAll('.sound_element')[i].addEventListener("keydown", function(event) {
+      if (event.key == "s"){
+        let voice_recording = new Audio(audio_link);
+        // console.log(audio_link)
+       voice_recording.play();
+      }
+
+    });
   }
 }
 
@@ -90,6 +100,8 @@ var flashcard_containers = document.getElementsByClassName("flashcard_container"
 
 var match = document.getElementsByClassName("match");
 var quiz = document.getElementsByClassName("quiz");
+
+
 
 
 for (let i = 0; i < btn.length; i++) {
@@ -108,8 +120,10 @@ for (let i = 0; i < btn.length; i++) {
         }
         for (let z = 0; z < flashcards.length; z++) {
           flashcards[z].onclick = function() {
+              hmong_color = "white";
               create_card_sound(running_flashcard, "white");
               card_function();
+              page_card = 1;
               outside.classList.add("display_hide");
               modal.style.display = "none";
             //   flashcard_containers.classList.remove("display_hide")
@@ -126,6 +140,7 @@ for (let i = 0; i < btn.length; i++) {
         }
       }
   }
+
 
 
 
@@ -200,11 +215,30 @@ function create_card_sound(category_list, hmong_type){
     // console.log('category already exist');
     remove_category("flashcard_container");
     document.querySelector(".outside").insertAdjacentHTML('afterend', card_str);
+    enable_code = 1
   } else {
     // console.log('category does not exist')
     document.querySelector(".outside").insertAdjacentHTML('afterend', card_str);
+    enable_code = 1
   }
 
+  // $(function(){
+
+  //   $( ".mySlides" ).on( "swipeleft", moveLeft );
+
+  //   function moveLeft(){
+  //     plusDivs(1)
+  //     console.log("you just swipped left")
+  //   }
+
+  //   $( ".mySlides" ).on( "swiperight", moveright );
+
+  //   function moveright(){
+  //     plusDivs(-1)
+  //     console.log("you just swipped right")
+  //   }
+
+  // });
   console.log(card_str);
   create_sound(category_list, hmong_type);
   showDivs(slideIndex);
@@ -221,12 +255,14 @@ function card_function() {
   var back_button = document.getElementById("back");
   // When the user clicks the button, open the modal 
   white_button.onclick = function() {
+    hmong_color = "white";
     create_card_sound(running_flashcard, "white");
     console.log('clicked white button')
     showDivs(slideIndex);
   }
 
   green_button.onclick = function() {
+    hmong_color = "green";
     create_card_sound(running_flashcard, "green");
     console.log('clicked green button')
     showDivs(slideIndex);
@@ -236,6 +272,8 @@ function card_function() {
     if (document.querySelector(".flashcard_container")) {
     // console.log('category already exist');
     remove_category("flashcard_container")
+    enable_code = 0;
+    page_card = 0;
     outside.classList.remove("display_hide");
     } else {
     // console.log('category does not exist')
@@ -243,7 +281,92 @@ function card_function() {
   }
 }
 
+var enable_code = 0
+var page_card = 0
+keyNavigation();
+
+
+function keyNavigation() {
+  
+    document.addEventListener("keydown", function(event) {
+      // console.log(event.key)
+      if (enable_code == 1 && page_card == 1) {
+        keyAction(event.key);
+        // buttonAnimation(event.key);
+      }
+    });
+
+
+}
+
+
+
+function keyAction(key) {
+
+  switch (key) {
+    case "b":
+      // Add function to go back
+      remove_category("flashcard_container")
+      enable_code = 0;
+      outside.classList.remove("display_hide");
+      break;
+
+    case "g":
+      // add function to change to hmong green 
+      create_card_sound(running_flashcard, "green");
+      console.log('clicked green button')
+      showDivs(slideIndex);
+      break;
+
+    case "w":
+       // add function to change to hmong white 
+      create_card_sound(running_flashcard, "white");
+      console.log('clicked white button')
+      showDivs(slideIndex);
+      break;
+
+    case "ArrowRight":
+      console.log("slide index:",slideIndex)
+      plusDivs(1)
+      console.log('pressed right key')
+      // console.log(enable_code) 
+      // Add function to move card to the right 
+      break;
+
+    case "ArrowLeft":
+      console.log("slide index:",slideIndex)
+      plusDivs(-1)
+      console.log('pressed left key')
+      // console.log(enable_code) 
+      // Add function to move card to the left
+      break;
+
+    case " ":
+      let sound_category = running_flashcard.flashcard_name;
+      let sound_name = running_flashcard.english[slideIndex-1];
+      let audio_link = "sounds/" + sound_category + "/"  + hmong_color + "/" + sound_name  + ".mp3";
+      // console.log(audio_link)
+      let voice_recording = new Audio(audio_link);
+      voice_recording.play();
+      break;
+
+
+    default: console.log(key);
+
+  }
+}
 
 
 
 
+function buttonAnimation(currentKey) {
+
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
+
+}

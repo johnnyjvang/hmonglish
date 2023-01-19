@@ -81,3 +81,7 @@
   min-width: 200px;
   margin: 2px;
 }
+
+.sortable-handler {
+  touch-action: none;
+}
