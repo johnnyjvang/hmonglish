@@ -167,7 +167,7 @@ function create_card(category_list, hmong_type) {
   for (let i = 0; i < category_list.white.length; i++) {
 
     let card_container = ' <div class="mySlides card sound_element"> ';
-    let image_card = '<img class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[i] + '.png">';
+    let image_card = '<img draggable="false" class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[i] + '.png">';
     let word_container = '<div class="container">';
     let hmong_word = ''
     if (hmong_type == "white") {

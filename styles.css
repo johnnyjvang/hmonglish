@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
+    user-select: none;
+    -webkit-user-select: none; /*Safari*/
+    -moz-user-select: none; /*Firefox*/
 }
 
 body {
