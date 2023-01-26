@@ -69,7 +69,7 @@ function create_sound(category_list, hmong_type) {
   for (let i = 0; i < category_list.english.length; i++) {
 
     let sound_category = category_list.flashcard_name;
-    let sound_name = category_list.english[running_shuffle[i]];
+    let sound_name = category_list.english[i];
 
     let audio_link = "sounds/" + sound_category + "/"  + hmong_type + "/" + sound_name  + ".mp3";
     console.log(audio_link)
@@ -104,22 +104,6 @@ var quiz = document.getElementsByClassName("quiz");
 
 
 
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-  
-      // Generate random number
-      var j = Math.floor(Math.random() * (i + 1));
-                  
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-  }
-      
-  return array;
-}
-
-
-
 for (let i = 0; i < btn.length; i++) {
     btn[i].onclick = function() {
         modal.style.display = "block";
@@ -127,18 +111,15 @@ for (let i = 0; i < btn.length; i++) {
         console.log(category_name)
         if (category_name == 'animals'){
             running_flashcard = animals;
-            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
-            running_shuffle = shuffleArray(running_shuffle);
+            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; })
         }
         if (category_name == 'colors'){
             running_flashcard = colors;
-            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
-            running_shuffle = shuffleArray(running_shuffle);
+            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; })
         }
         if (category_name == 'numbers'){
             running_flashcard = numbers;
-            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
-            running_shuffle = shuffleArray(running_shuffle);
+            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; })
         }
         for (let z = 0; z < flashcards.length; z++) {
           flashcards[z].onclick = function() {
@@ -189,17 +170,17 @@ function create_card(category_list, hmong_type) {
   for (let i = 0; i < category_list.white.length; i++) {
 
     let card_container = ' <div class="mySlides card sound_element"> ';
-    let image_card = '<img draggable="false" class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[running_shuffle[i]] + '.png">';
+    let image_card = '<img draggable="false" class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[i] + '.png">';
     let word_container = '<div class="container">';
     let hmong_word = ''
     if (hmong_type == "white") {
-      hmong_word = '<h1><b>' + category_list.white[running_shuffle[i]] + '</b></h1>';
+      hmong_word = '<h1><b>' + category_list.white[i] + '</b></h1>';
     }
     else{
-      hmong_word = '<h1><b>' + category_list.green[running_shuffle[i]] + '</b></h1>';
+      hmong_word = '<h1><b>' + category_list.green[i] + '</b></h1>';
     }
 
-    let english_word = '<h3>' + category_list.english[running_shuffle[i]] + '</h3>';
+    let english_word = '<h3>' + category_list.english[i] + '</h3>';
     let end_str = '</div></div>';
     let running_card_str =  card_container + image_card + word_container + hmong_word + english_word + end_str;
 
@@ -212,7 +193,7 @@ function create_card(category_list, hmong_type) {
 
   }
   let flashcard_str = flashcard_start + flashcard_category + flashcard_middle
-  let ending_slide_str = '<br><button id="back" class="back">Back Button</button> <button id="shuffle_button" class="shuffle_button">Shuffle Button</button> <button id="help_button" class="help_button">Keyboard Hot Keys</button></div></div>'
+  let ending_slide_str = '<br><button id="back" class="back">Back Button</button></div></div> <button id="shuffle" class="shuffle">Shuffle Button</button></div></div>'
   let total_slide_str = slide_intro + running_slide_buttons + ending_slide_str
   
   let total_container_end = '</div>'
@@ -274,30 +255,6 @@ function card_function() {
   var green_button = document.getElementsByClassName("green_button")[0];
   var outside = document.getElementsByClassName("outside")[0];
 
-  var shuffle_button = document.getElementsByClassName("shuffle_button")[0];
-
-  var help_button = document.getElementsByClassName("help_button")[0];
-  var help_modal = document.getElementById("help_modal");
-
-  // var unhide_btn = document.getElementById("unhide_btn");
-  
-  
-  
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[1];
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    help_modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == help_modal) {
-      help_modal.style.display = "none";
-    }
-  }
-
   var back_button = document.getElementById("back");
   // When the user clicks the button, open the modal 
   white_button.onclick = function() {
@@ -325,17 +282,6 @@ function card_function() {
     // console.log('category does not exist')
     }
   }
-
-
-  shuffle_button.onclick = function() {
-    running_shuffle = shuffleArray(running_shuffle);
-    create_card_sound(running_flashcard, hmong_color);
-  }
-
-  help_button.onclick = function() {
-    help_modal.style.display = "block";
-  }
-
 }
 
 var enable_code = 0
@@ -380,11 +326,6 @@ function keyAction(key) {
       create_card_sound(running_flashcard, "white");
       console.log('clicked white button')
       showDivs(slideIndex);
-      break;
-
-    case "s":
-      running_shuffle = shuffleArray(running_shuffle);
-      create_card_sound(running_flashcard, hmong_color);s
       break;
 
     case "ArrowRight":

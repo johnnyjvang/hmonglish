@@ -116,7 +116,117 @@
         .card_container{
             height: 500px;
         }
-  
+
+        /* The switch - the box around the slider */
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        /* The slider */
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: green;
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px green;
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 34px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+
+        .flex_row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 800px;
+        background-color: chocolate;
+        }
+
+        .flex_row_80{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        max-width: 80vw;
+        background-color: chocolate;
+        }
+        
+        .flex_row_different{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 800px;
+        padding: 20px;
+        background-color: chocolate;
+        }
+
+        .green_font{
+        color: green;
+        }
+
+        .white_font{
+        color: black;
+        }
+
+        .nav_container{
+        width: 100vw;
+        background-color: purple;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        padding: 20px;
+        }
+
+
       </style>
 
 
@@ -126,12 +236,40 @@
 <div class="flashcard_container">
 
 
-    <div class="w3-container flex_center">
-        <h2>Category Name</h2>
-        <div>
-            <button id="unhide_btn" class="white_button">White</button>
-            <button id="unhide_btn" class="green_button opacity_50">Green</button>
+    <div class="w3-container nav_container">
+        <div class="flex_row_80">
+            <div class="flex_row_different">
+
+                
+
+                <h2>Category Name</h2>
+
+                <div class="toggle">
+                    <div class="toggle-label toggle-label-off">Option A</div>
+                    <div class="toggle-switch"></div>
+                    <div class="toggle-label toggle-label-on">Option B</div>
+                  </div>
+
+                <button id="unhide_btn" class="white_button">White</button>
+                <button id="unhide_btn" class="green_button">green</button>
+
+                <div>
+                    <!-- <h3 class="white_font">Dawj</h3> -->
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <!-- <h3 class="green_font">Green</h3> -->
+                </div>
+                <!-- Rounded switch -->
+    
+
+            </div>
+
         </div>
+
+      
+
     </div>
 
     <div class="flex-row card-container">
@@ -231,6 +369,41 @@
 <script>
 
     var card_containers = document.getElementsByClassName("card_container");
+
+    var white_button = document.getElementsByClassName("white_button")[0];
+
+    var green_button = document.getElementsByClassName("green_button")[0];
+
+
+    var toggle_check = document.getElementsByClassName("switch")[0];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkbox = document.querySelector('input[type="checkbox"]');
+
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+            // do this
+            console.log('Checkedeee');
+            } else {
+            // do that
+            console.log('Not checkedss');
+            }
+        });
+    });
+
+
+    var checkbox = document.querySelector('input[type="checkbox"]');
+
+    white_button.onclick = function(){
+        checkbox.checked = false;
+        console.log("white button clicked")
+    }
+
+    
+    green_button.onclick = function(){
+        checkbox.checked = true;
+        console.log("green button clicked")
+    }
     
 
     for (let i = 0; i < card_containers.length; i++) {
@@ -267,6 +440,14 @@
     function keyAction(key) {
 
     switch (key) {
+
+    case "w":
+        checkbox.checked = false;
+        break;
+
+    case "g":
+        checkbox.checked = true;
+        break;
 
 
     case " ":
