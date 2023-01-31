@@ -250,22 +250,9 @@ function card_function(hmong_type) {
     var help_button = document.getElementsByClassName("help_button")[0];
     var help_modal = document.getElementById("help_modal");
   
-    var checkbox = document.querySelector('input[type="checkbox"]');
+    
     var back_button = document.getElementById("back");
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // var checkbox = document.querySelector('input[type="checkbox"]');
-
-        checkbox.addEventListener('change', function () {
-            if (checkbox.checked) {
-            // do this
-            console.log('Checkedeee');
-            } else {
-            // do that
-            console.log('Not checkedss');
-            }
-        });
-    });
 
     // checkbox.onclick = function(){
     //   if (checkbox.checked == true){
@@ -329,6 +316,29 @@ function card_function(hmong_type) {
 // ------------------------------------------------------------------------------------------------------------------------------
 
 
+function checkbox(){
+  console.log("checkbox activated")
+  document.addEventListener('DOMContentLoaded', function () {
+    if (enable_code == 1 && page_card == 1) {
+      var checkbox = document.querySelector('input[type="checkbox"]');
+      checkbox.addEventListener('change', function () {
+          if (checkbox.checked) {
+          // do this
+          console.log('Checkedeee');
+          } else {
+          // do that
+          console.log('Not checkedss');
+          }
+      });
+    }
+  });
+};
+
+
+
+
+
+
 var enable_code = 0
 var page_card = 0
 keyNavigation();
@@ -342,6 +352,8 @@ function keyNavigation() {
             // buttonAnimation(event.key);
         }
     });
+
+
 }
 
 
@@ -390,6 +402,13 @@ function keyAction(key) {
         help_modal.style.display = "block";
       break;
 
+    case "p":
+      // nodeType: 1
+      // ariaLabel: "Go to slide 1"
+        var pag_bullet = swiper.activeIndex;
+        var pagnation_current = swiper.realIndex
+        console.log(pag_bullet, pagnation_current)
+        break;
 
     case " ":
         let sound_category = running_flashcard.flashcard_name;
@@ -399,6 +418,12 @@ function keyAction(key) {
         // console.log(audio_link)
         voice_recording.play();
         break;
+
+    // case "p":
+    //   console.log("Ppressed P")
+    //   var card_count_number = document.getElementsByClassName("card_count")[0].innerHTML.split("/")[0];
+    //   console.log(card_count_number);
+    //   break;
 
 
     default: console.log(key);
@@ -410,7 +435,7 @@ function keyAction(key) {
 //     Swiperjs - https://swiperjs.com/demos/260-keyboard-control/core
 // ------------------------------------------------------------------------------------------------------------------------------
 function swiper_js(){
-    var swiper = new Swiper(".mySwiper", {
+    let swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         spaceBetween: 30,
         keyboard: {
@@ -426,3 +451,4 @@ function swiper_js(){
         },
     });
 }
+

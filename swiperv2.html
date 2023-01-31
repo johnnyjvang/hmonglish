@@ -294,7 +294,7 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper card_box">
                     <div class="swiper-slide flex-row card_container">
-                        <h6>1/2</h6>
+                        <h6 class="card_count">1/2</h6>
                         <img class="card_image" src="https://cdn.vox-cdn.com/thumbor/OviKJXjiLwSjgXdBMzj5uf8QzUU=/0x0:2192x1132/1400x1050/filters:focal(1096x566:1097x567)/cdn.vox-cdn.com/uploads/chorus_asset/file/23761514/kirby_dream_buffet.png">
                         <div class="container">
                             <h2><b>Hmong Word</b></h2>
@@ -439,7 +439,8 @@
 
     // var green_button = document.getElementsByClassName("green_button")[0];
 
-
+    var word_container = document.getElementsByClassName("container");
+    let current_word = ""
     var toggle_check = document.getElementsByClassName("switch")[0];
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -447,11 +448,13 @@
 
         checkbox.addEventListener('change', function () {
             if (checkbox.checked) {
-            // do this
-            console.log('Checkedeee');
+                current_word = word_container[swiper.activeIndex]
+                current_word.style.color = "gray"
+                console.log('Checkedeee');
             } else {
-            // do that
-            console.log('Not checkedss');
+                current_word = word_container[swiper.activeIndex]
+                current_word.style.color = "teal"
+                console.log('Not checkedss');
             }
         });
     });
@@ -507,11 +510,25 @@
     switch (key) {
 
     case "w":
+        current_word = word_container[swiper.activeIndex]
         checkbox.checked = false;
+        console.log("button pressed w")
+        current_word.style.color = "blue"
         break;
 
     case "g":
+        current_word = word_container[swiper.activeIndex]
         checkbox.checked = true;
+        console.log("button pressed g")
+        current_word.style.color = "green"
+        break;
+
+    case "p":
+        // nodeType: 1
+        // ariaLabel: "Go to slide 1"
+        var pag_bullet = swiper.activeIndex;
+        var pagnation_current = swiper.realIndex
+        console.log(pag_bullet, pagnation_current)
         break;
 
 
