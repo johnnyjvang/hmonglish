@@ -4,25 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards</title>
+    <title>Hmonglish</title>
     <link rel="stylesheet" href="/styles2.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
-  />
+    href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Demo styles -->
     <style>
 
+        * {
+            font-family: -apple-system, -apple-system, 
+                BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                Oxygen, Ubuntu, Cantarell, 'Open Sans', 
+                'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page_font {
+            font-family: -apple-system, -apple-system, 
+                BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                Oxygen, Ubuntu, Cantarell, 'Open Sans', 
+                'Helvetica Neue', sans-serif;
+        }
 
         body {
           background: #dddccf;
-          font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
           font-size: 14px;
           color: #000;
           margin: 0;
           padding: 0;
         }
+
+        .font_white {
+            color: white;
+        }
+
   
         .swiper {
           width: 100%;
@@ -72,15 +91,15 @@
             flex-direction: column;
             justify-content: center;
             width: 100vw;
-            padding: 20px;
+            /* padding: 20px; */
             /* height: 800px; */
-            background-color: blue;
+            /* background-color: blue; */
         }
 
         .cards{
             max-width: 80vw;
             /* height: auto; */
-            background-color: #79B4B7;
+            /* background-color: #79B4B7; */
             z-index: 0;
         }
 
@@ -95,7 +114,7 @@
         .card_box{
             width: 800px;
             height: auto;
-            background-color: green;
+            /* background-color: green; */
         }
 
         .card-image{
@@ -104,13 +123,13 @@
         /* max-width: 35vw; */
         /* width: 100%;
         height: auto; */
-        background-color: purple;
+        /* background-color: purple; */
         /* object-fit: cover; */
         }
         
         .container{
             margin: 10px;
-            background-color: chocolate;
+            /* background-color: chocolate; */
         }
         
         .card_container{
@@ -158,11 +177,11 @@
         }
 
         input:checked + .slider {
-        background-color: green;
+        background-color: #39ac6b;
         }
 
         input:focus + .slider {
-        box-shadow: 0 0 1px green;
+        box-shadow: 0 0 1px #39ac6b;
         }
 
         input:checked + .slider:before {
@@ -186,7 +205,7 @@
         justify-content: space-between;
         flex-direction: row;
         width: 800px;
-        background-color: chocolate;
+        /* background-color: chocolate; */
         }
 
         .flex_row_80{
@@ -195,7 +214,7 @@
         justify-content: space-between;
         flex-direction: row;
         max-width: 80vw;
-        background-color: chocolate;
+        background-color: #167D7F;
         }
         
         .flex_row_different{
@@ -205,7 +224,7 @@
         justify-content: space-between;
         width: 800px;
         padding: 20px;
-        background-color: chocolate;
+        background-color: #167D7F;
         }
 
         .green_font{
@@ -218,12 +237,12 @@
 
         .nav_container{
         width: 100vw;
-        background-color: purple;
+        /* background-color: purple; */
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: row;
-        padding: 20px;
+        padding: 20px 0px 0px 0px;
         }
 
         .back{
@@ -257,7 +276,7 @@
         
         .column {
             margin: 10px;
-            background-color: green;
+            background-color: #167D7F;
             color: black;
             min-width: 300px;
             height: 200px;
@@ -299,6 +318,7 @@
             /* The Modal (background) */
         .modal {
             display: none; /* Hidden by default */
+            text-align: center;
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
             padding-top: 100px; /* Location of the box */
@@ -313,7 +333,7 @@
         
         /* Modal Content */
         .modal-content {
-            background-color: #fefefe;
+            background-color: #dddccf;
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
@@ -353,8 +373,8 @@
 
 <div class="outside">
 
-    <h1>Hmonglish</h1>
-    <h3>Building Confidence</h3>
+    <h1 class="page_font">Hmonglish</h1>
+    <h1 class="page_font">Building Confidence</h1>
     
     
         <div class="columns">
@@ -388,11 +408,11 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h1>ArrowRight = Right</h1>
-        <h1>ArrowLeft = Left</h1>
+        <h1>RightArrow = Right</h1>
+        <h1>LeftArrow = Left</h1>
         <h1>Spacebar = Sound</h1>
         <h1>W = White</h1>
-        <h1>G = White</h1>
+        <h1>G = Green</h1>
         <h1>B = Back</h1>
         <h1>S = Shuffle</h1>
   
@@ -410,7 +430,7 @@
     <div class="w3-container nav_container">
         <div class="flex_row_80">
             <div class="flex_row_different">
-                <h2 class="category_name">Category Name</h2>
+                <h2 class="category_name page_font">Category Name</h2>
                 <div>
                     <label class="switch">
                         <input type="checkbox">
@@ -499,7 +519,7 @@
         
                 <button id="back" class="back">Back Button</button>
                 <button id="shuffle_button" class="shuffle_button">Shuffle Button</button>
-                <button id="help_button" class="help_button">Keyboard Hot Keys</button>
+                <button id="help_button" class="help_button"><i class="fa fa-keyboard-o"></i></button>
         
             </div>
         </div>
@@ -758,7 +778,7 @@
         let swiper4_7 = '';
 
         for (let i = 0; i < category_list.white.length; i++) {
-            let swiper4 = '<div class="swiper-slide flex-row card_container sound_element"><h6>' + [i+1] +"/" + category_list.english.length + '</h6>'
+            let swiper4 = '<div class="swiper-slide flex-row card_container sound_element"><h6 class="page_font">' + [i+1] +"/" + category_list.english.length + '</h6>'
             let swiper5 = '<img class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[running_shuffle[i]] + '.png"><div class="container">'
             let swiper6 = ''
             if (hmong_type == "white") {
@@ -771,7 +791,7 @@
             running_swiper = swiper4 + swiper5 + swiper6 + swiper7
             swiper4_7 = swiper4_7.concat(running_swiper);
         }
-        let swiper8 = '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div></div><div class="flex_row_80"><button id="back" class="back">Back Button</button><button id="shuffle_button" class="shuffle_button">Shuffle Button</button><button id="help_button" class="help_button">Keyboard Hot Keys</button></div></div></div>'
+        let swiper8 = '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div></div><div class="flex_row_80"><button id="back" class="back"><i class="fa fa-long-arrow-left" style="font-size:36px"></i></i></button><button id="shuffle_button" class="shuffle_button"><i class="fa fa-refresh" style="font-size:36px;"></i></button><button id="help_button" class="help_button"><i class="fa fa-keyboard-o" style="font-size:36px"></i></button></div></div></div>'
         let final_str = swiper1 + swiper2 + swiper3 + swiper4_7 + swiper8
         return final_str 
     }
