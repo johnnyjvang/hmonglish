@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="/styles2.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+  />
+    <!-- Demo styles -->
+    <style>
+
+
+        body {
+          background: #dddccf;
+          font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+  
+        .swiper {
+          width: 100%;
+          height: 100%;
+        }
+  
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
+  
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+  
+        .swiper-slide img {
+            width: 300px;
+            max-height: 300px;
+            object-fit: cover;
+            margin: 5px;
+          /* display: block;
+          object-fit: cover; */
+        }
+
+        .flex-row{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        .card-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100vw;
+            padding: 20px;
+            /* height: 800px; */
+            background-color: blue;
+        }
+
+        .cards{
+            max-width: 80vw;
+            /* height: auto; */
+            background-color: #79B4B7;
+            z-index: 0;
+        }
+
+        .grid-ish{
+        /* width: 40vw; */
+        /* flex: flex-grow flex-strink flex-basis */
+        /* flex: 1 1 40vw; */
+        /* margin: 20px; */
+        /* height: auto; */
+        }
+
+        .card_box{
+            width: 800px;
+            height: auto;
+            background-color: green;
+        }
+
+        .card-image{
+        /* width: 100%; */
+        /* height: auto; */
+        /* max-width: 35vw; */
+        /* width: 100%;
+        height: auto; */
+        background-color: purple;
+        /* object-fit: cover; */
+        }
+        
+        .container{
+            margin: 10px;
+            background-color: chocolate;
+        }
+        
+        .card_container{
+            height: 500px;
+        }
+
+        /* The switch - the box around the slider */
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        /* The slider */
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: green;
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px green;
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 34px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+
+        .flex_row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 800px;
+        background-color: chocolate;
+        }
+
+        .flex_row_80{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        max-width: 80vw;
+        background-color: chocolate;
+        }
+        
+        .flex_row_different{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 800px;
+        padding: 20px;
+        background-color: chocolate;
+        }
+
+        .green_font{
+        color: green;
+        }
+
+        .white_font{
+        color: black;
+        }
+
+        .nav_container{
+        width: 100vw;
+        background-color: purple;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        padding: 20px;
+        }
+
+        .back{
+            width: 25%;
+            height: 50px;
+            margin: 4px;
+        }
+
+        .shuffle_button{
+            width: 50%;
+            height: 50px;
+            margin: 4px;
+        }
+
+        .help_button{
+            width: 25%;
+            height: 50px;
+            margin: 4px;
+        }
+
+
+        .columns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            width: 100%;
+            flex-wrap: wrap;
+
+        }
+        
+        .column {
+            margin: 10px;
+            background-color: green;
+            color: black;
+            min-width: 300px;
+            height: 200px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .outside {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        @media (min-width: 1080px) {
+            .columns {
+                flex-wrap: nowrap;
+            }
+        }
+
+
+        .column:hover {
+            transform: scale(1.05);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+            opacity: 80%;
+        }
+        .column {
+            transition: 0.5s ease;
+            cursor: pointer;
+            margin:10px;
+        }
+
+
+
+            /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        .display_hide{
+        display: none;
+        }
+        .modal-content{
+            z-index: 10;
+        }
+
+      </style>
+
+
+</head>
+<body>
+
+
+
+<div class="outside">
+
+    <h1>Hmonglish</h1>
+    <h3>Building Confidence</h3>
+    
+    
+        <div class="columns">
+            <div class="column myBtn">animals</div>
+            <div class="column myBtn">colors</div>
+            <div class="column myBtn">numbers</div>
+        </div>
+    
+    
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="columns">
+          <div class="column flashcard">Flashcard</div>
+          <div class="column match">Match</div>
+          <div class="column quiz">Quiz</div>
+      </div>
+    </div>
+  
+  </div>
+  
+  
+  <!-- help -->
+  <div id="help_modal" class="modal">
+  
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1>ArrowRight = Right</h1>
+        <h1>ArrowLeft = Left</h1>
+        <h1>Spacebar = Sound</h1>
+        <h1>W = White</h1>
+        <h1>G = White</h1>
+        <h1>B = Back</h1>
+        <h1>S = Shuffle</h1>
+  
+      </div>
+    
+    </div>
+
+
+
+
+<div class="flashcard_container display_hide">
+
+
+
+    <div class="w3-container nav_container">
+        <div class="flex_row_80">
+            <div class="flex_row_different">
+                <h2 class="category_name">Category Name</h2>
+                <div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-row card-container">
+        <div class="cards grid-ish">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper card_box">
+                    <div class="swiper-slide flex-row card_container">
+                        <h6 class="card_count">1/2</h6>
+                        <img class="card_image" src="https://cdn.vox-cdn.com/thumbor/OviKJXjiLwSjgXdBMzj5uf8QzUU=/0x0:2192x1132/1400x1050/filters:focal(1096x566:1097x567)/cdn.vox-cdn.com/uploads/chorus_asset/file/23761514/kirby_dream_buffet.png">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://www.giantbomb.com/a/uploads/original/14/149329/2311703-1000px_wikia_visualization_add_6.png">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://cdn.mos.cms.futurecdn.net/E3BvgsNKbdUidsLPuyeaWR.jpg">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://mms.businesswire.com/media/20210202005179/en/856219/23/01_3D_Kirby_Normal_11.jpg">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://play.nintendo.com/images/Masthead_Kirby.17345b1513ac044897cfc243542899dce541e8dc.9afde10b.png">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://www.videogameschronicle.com/files/2022/07/kirbys-dream-buffet-12.jpg">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/en_US/products/merchandise/plush/kirby-6-plush/107374-little-buddy-plush-kirby-6-inch-1200x675">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide flex-row card_container">
+                        <h6>1/2</h6>
+                        <img class="card_image" src="https://m.media-amazon.com/images/I/41gVMv8JlaL._AC_.jpg">
+                        <div class="container">
+                            <h2><b>Hmong Word</b></h2>
+                            <p>English Word</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="flex_row_80">
+        
+                <button id="back" class="back">Back Button</button>
+                <button id="shuffle_button" class="shuffle_button">Shuffle Button</button>
+                <button id="help_button" class="help_button">Keyboard Hot Keys</button>
+        
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+
+    var modal = document.getElementById("myModal");
+
+    // var unhide_btn = document.getElementById("unhide_btn");
+
+
+    var outside = document.getElementsByClassName("outside")[0];
+    console.log(outside)
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+
+    // unhide_btn.onclick = function() {
+    //   outside.classList.remove("display_hide");
+    //   flashcard_containers.classList.add("display_hide")
+    // }
+
+    // var hide_btn = document.getElementById("hide_btn");
+
+    // When the user clicks the button, open the modal 
+    // hide_btn.onclick = function() {
+    //   outside.classList.add("display_hide");
+    // }
+
+
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+  
+    var entire_flashcards = document.getElementsByClassName("flashcard_container")[0];
+    // var flashcard_container_js = getElementsByClassName("flashcard_container");
+
+
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+        
+            // Generate random number
+            var j = Math.floor(Math.random() * (i + 1));
+                        
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+            
+        return array;
+    }
+
+    function remove_category(class_name) {
+        let myobj = document.querySelector("." + class_name);
+        myobj.remove();
+    }
+
+    function create_sound(category_list, hmong_type) {
+        for (let i = 0; i < category_list.english.length; i++) {
+    
+        let sound_category = category_list.flashcard_name;
+        let sound_name = category_list.english[running_shuffle[i]];
+    
+        let audio_link = "sounds/" + sound_category + "/"  + hmong_type + "/" + sound_name  + ".mp3";
+        console.log(audio_link)
+
+        document.querySelectorAll('.sound_element')[i].addEventListener("click", function() {
+            // console.log("added click function to" + String(i));
+            let voice_recording = new Audio(audio_link);
+            // console.log(audio_link)
+            voice_recording.play();
+        });
+
+        }
+    }
+
+    function card_function(){
+        var shuffle_button = document.getElementsByClassName("shuffle_button")[0];
+  
+        var help_button = document.getElementsByClassName("help_button")[0];
+        var help_modal = document.getElementById("help_modal");
+
+        
+        var back_button = document.getElementById("back");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[1];
+    
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            help_modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == help_modal) {
+            help_modal.style.display = "none";
+            }
+        }
+
+        back_button.onclick = function() {
+            if (document.querySelector(".card-container")) {
+            console.log('category already exist');
+            enable_code = 0;
+            outside.classList.remove("display_hide");
+            entire_flashcards.classList.add("display_hide");
+            } else {
+            console.log('category does not exist')
+            }
+        }
+
+        shuffle_button.onclick = function() {
+            running_shuffle = shuffleArray(running_shuffle);
+            create_card_sound(running_flashcard, hmong_type);
+        }
+
+        help_button.onclick = function() {
+            help_modal.style.display = "block";
+        }
+
+    }
+
+    let hmong_type = ""
+    let running_flashcard = {};
+    let hmong_color = "";
+    var running_shuffle = [];
+    
+    let animals = {
+    english:["bear", "bull", "cat", "chicken", "cow", "deer", "duck", "elephant", "fox", "goat", "hen", "horse", "lion", "monkey"],
+    white:["dais", "heev nyuj", "miv", "qaib", "nyuj", "muas lwj", "os", "ntxhw", "hma", "tshis", "poj qaib", "nees", "tsov ntxhuav", "liab"],
+    green:["dlais", "heev nyuj", "miv", "qab", "nyuj", "mos lwj", "os", "ntxhw", "hma", "mi es", "puj qaib", "neeg", "tsuv ntxhuav", "lab"],
+    flashcard_name:"animals"
+    }
+
+
+    let numbers = {
+        english:['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+        white:['ib', 'ob', 'peb', 'pluab', 'tsib', 'rau', 'xyaa', 'yim', 'cuaj', 'kuam'],
+        green:['ib', 'ob', 'peb', 'pluab', 'tsis', 'rau', 'xyaa', 'yim', 'cuaj', 'kaum'],
+        flashcard_name:"numbers"
+    }
+    
+    let colors = {
+        english:["black", "blue", "green", "purple", "red", "yellow"],
+        white:["dub", "xiav", "ntsuab", "xiav tsuag", "liab", "daj"],
+        green:["dlub", "xav", "ntsuab", "xim tsom xem", "lab", "dlaaj"],
+        flashcard_name:"colors"
+    }
+
+    // Flash Card Buttons
+    var btn = document.getElementsByClassName("myBtn");
+
+    // Modal Flashcard Button
+    var flashcards = document.getElementsByClassName("flashcard");
+    var flashcard_containers = document.getElementsByClassName("flashcard_container")[0];
+
+    // Other Buttons
+    var match = document.getElementsByClassName("match");
+    var quiz = document.getElementsByClassName("quiz");
+
+    var card_containers = document.getElementsByClassName("card_container");
+
+    for (let i = 0; i < btn.length; i++) {
+    btn[i].onclick = function() {
+        modal.style.display = "block";
+        let category_name = btn[i].innerHTML;
+        console.log(category_name)
+        if (category_name == 'animals'){
+            running_flashcard = animals;
+            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
+            running_shuffle = shuffleArray(running_shuffle);
+        }
+        if (category_name == 'colors'){
+            running_flashcard = colors;
+            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
+            running_shuffle = shuffleArray(running_shuffle);
+        }
+        if (category_name == 'numbers'){
+            running_flashcard = numbers;
+            running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
+            running_shuffle = shuffleArray(running_shuffle);
+        }
+        for (let z = 0; z < flashcards.length; z++) {
+          flashcards[z].onclick = function() {
+              outside.classList.add("display_hide");
+              flashcard_containers.classList.remove("display_hide");
+              console.log("outside should be hidden")
+              modal.style.display = "none";
+              hmong_color = "white";
+              create_card_sound(running_flashcard, "white");
+          }
+
+          match[z].onclick = function() {
+            alert("Match Game Coming Soon");
+          //   flashcard_containers.classList.remove("display_hide")
+          }
+          quiz[z].onclick = function() {
+            alert("Quiz Game Coming Soon");
+          //   flashcard_containers.classList.remove("display_hide")
+          }
+        }
+      }
+     }
+
+     function create_card_sound(category_list, hmong_type){
+
+        let card_str = create_card(category_list, hmong_type);
+
+        if (document.querySelector(".card-container")) {
+            // console.log('category already exist');
+            remove_category("card-container");
+            document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
+            enable_code = 1
+        } else {
+            // console.log('category does not exist')
+            document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
+            enable_code = 1
+        }
+
+
+        console.log(card_str);
+        create_sound(category_list, hmong_type);
+        swiperjs();
+        card_function();
+   
+     }
+
+
+     function create_card(category_list, hmong_type) {
+        var category_name = document.getElementsByClassName("category_name")[0];
+        category_name.innerHTML = category_list.flashcard_name;
+
+        let swiper1 = ''
+        let swiper2 = ''
+        let swiper3 = '<div class="flex-row card-container"><div class="cards grid-ish"><div class="swiper mySwiper"><div class="swiper-wrapper card_box">'
+
+        let running_swiper = ''
+        let swiper4_7 = '';
+
+        for (let i = 0; i < category_list.white.length; i++) {
+            let swiper4 = '<div class="swiper-slide flex-row card_container sound_element"><h6>' + [i+1] +"/" + category_list.english.length + '</h6>'
+            let swiper5 = '<img class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[running_shuffle[i]] + '.png"><div class="container">'
+            let swiper6 = ''
+            if (hmong_type == "white") {
+                    swiper6 = '<h2><b>' + category_list.white[running_shuffle[i]] + '</b></h2>';
+                }
+                else{
+                    swiper6 = '<h2><b>' + category_list.green[running_shuffle[i]] + '</b></h2>';
+                }
+            let swiper7 = '<p>' + category_list.english[running_shuffle[i]] + '</p></div> </div>';
+            running_swiper = swiper4 + swiper5 + swiper6 + swiper7
+            swiper4_7 = swiper4_7.concat(running_swiper);
+        }
+        let swiper8 = '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div></div><div class="flex_row_80"><button id="back" class="back">Back Button</button><button id="shuffle_button" class="shuffle_button">Shuffle Button</button><button id="help_button" class="help_button">Keyboard Hot Keys</button></div></div></div>'
+        let final_str = swiper1 + swiper2 + swiper3 + swiper4_7 + swiper8
+        return final_str 
+    }
+
+
+
+    // var white_button = document.getElementsByClassName("white_button")[0];
+
+    // var green_button = document.getElementsByClassName("green_button")[0];
+
+    var word_container = document.getElementsByClassName("container");
+    let current_word = ""
+    var toggle_check = document.getElementsByClassName("switch")[0];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkbox = document.querySelector('input[type="checkbox"]');
+
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                current_word = word_container[swiper.activeIndex]
+                current_word.style.color = "gray"
+                console.log('Checkedeee');
+                create_card_sound(running_flashcard, "green");
+            } else {
+                current_word = word_container[swiper.activeIndex]
+                current_word.style.color = "teal"
+                console.log('Not checkedss');
+                create_card_sound(running_flashcard, "white");
+            }
+        });
+    });
+
+
+    var checkbox = document.querySelector('input[type="checkbox"]');
+
+
+    for (let i = 0; i < card_containers.length; i++) {
+        card_containers[i].onclick = function() {
+            let sound_category = "animals";
+            let sound_name = "bear";
+            let hmong_type = "white";
+            let audio_link = "sounds/" + sound_category + "/"  + hmong_type + "/" + sound_name  + ".mp3";
+            let voice_recording = new Audio(audio_link);
+            // console.log(audio_link)
+            voice_recording.play();
+        }
+    }
+
+
+    let enable_code = 1
+    let page_card = 1
+    keyNavigation();
+    swiperjs();
+
+
+    function keyNavigation() {
+    
+        document.addEventListener("keydown", function(event) {
+        // console.log(event.key)
+        if (enable_code == 1 && page_card == 1) {
+            keyAction(event.key);
+            // buttonAnimation(event.key);
+        }
+        });
+
+
+    }
+
+    function keyAction(key) {
+
+    switch (key) {
+
+    case "w":
+        if (checkbox.checked == true){
+            // current_word = word_container[swiper.activeIndex]
+            checkbox.checked = false;
+            console.log("button pressed w",current_word)
+            // current_word.style.color = "blue"
+            create_card_sound(running_flashcard, "white");
+        }
+        break;
+
+    case "g":
+        if (checkbox.checked == false){
+            // current_word = word_container[swiper.activeIndex]
+            checkbox.checked = true;
+            console.log("button pressed g",current_word)
+            // current_word.style.color = "green"
+            create_card_sound(running_flashcard, "green");
+        }
+        break;
+
+
+    case "b":
+        outside.classList.remove("display_hide");
+        entire_flashcards.classList.add("display_hide");
+        enable_code = 0;
+        break;
+
+    // case "z":
+    //     entire_flashcards.classList.add("display_hide");
+    //     break;  
+    
+    // case "x":
+    //     entire_flashcards.classList.remove("display_hide");
+    //     break;
+
+    // case "p":
+    //     // nodeType: 1
+    //     // ariaLabel: "Go to slide 1"
+    //     var pag_bullet = swiper.activeIndex;
+    //     var pagnation_current = swiper.realIndex
+    //     console.log(pag_bullet, pagnation_current)
+    //     break;
+
+    case "k":
+        var help_modal = document.getElementById("help_modal");
+        help_modal.style.display = "block";
+        break;
+
+    case "s":
+        running_shuffle = shuffleArray(running_shuffle);
+        create_card_sound(running_flashcard, hmong_type);
+        break;
+
+    case " ":
+        let sound_category = running_flashcard.flashcard_name;
+        let sound_name = running_flashcard.english[running_shuffle[swiper.activeIndex]];
+        let audio_link = "sounds/" + sound_category + "/"  + hmong_type + "/" + sound_name  + ".mp3";
+        let voice_recording = new Audio(audio_link);
+        // console.log(audio_link)
+        voice_recording.play();
+        break;
+
+
+    default: console.log(key);
+
+    }
+    }
+
+
+
+    function swiperjs(){
+        swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            keyboard: {
+                enabled: true,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    }
+
+
+</script>
+
+<!-- <script src="app2.js" charset="utf-8"></script> -->
+
+</body>
+</html>
