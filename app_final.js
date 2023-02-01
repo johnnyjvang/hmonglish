@@ -163,6 +163,7 @@ function create_card_sound(category_list, hmong_type){
         enable_code = 1
     }
 
+
     var checkbox = document.querySelector('input[type="checkbox"]');
     if (hmong_type == "white"){
       checkbox.checked = false;
@@ -197,7 +198,7 @@ function create_sound(category_list, hmong_type) {
       });
 
     }
-  }
+}
 
 // ------------------------------------------------------------------------------------------------------------------------------
 //     Create Flashcard HTML STRING 
