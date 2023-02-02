@@ -36,6 +36,8 @@
           color: #000;
           margin: 0;
           padding: 0;
+          height: 100vh;
+          width: 100vw;
         }
 
         .font_white {
@@ -590,29 +592,75 @@
         return array;
     }
 
+    let hmong_type = "white"
+    let running_flashcard = {};
+    let hmong_color = "white";
+    var running_shuffle = [];
+    let new_flashcard = 0;
+
     function remove_category(class_name) {
         let myobj = document.querySelector("." + class_name);
         myobj.remove();
     }
 
+    
+
+
     function create_sound(category_list, hmong_type) {
+        console.log(hmong_type)
         for (let i = 0; i < category_list.english.length; i++) {
     
+            let sound_category = category_list.flashcard_name;
+            let sound_name = category_list.english[running_shuffle[i]];
+            
+
+            
+            let audio_link_white = "sounds/" + sound_category + "/"  + "white" + "/" + sound_name  + ".mp3";
+            let audio_link_green = "sounds/" + sound_category + "/"  + "green" + "/" + sound_name  + ".mp3";
+
+            function play_sound(){
+                if (hmong_type=="white"){
+                    // console.log("added click function to" + String(i));
+                    let voice_recording_white = new Audio(audio_link_white);
+                    // console.log(audio_link)
+                    voice_recording_white.play();
+                    console.log("played white voice")
+                } else{
+                    // console.log("added click function to" + String(i));
+                    let voice_recording_green = new Audio(audio_link_green);
+                    // console.log(audio_link)
+                    voice_recording_green.play();
+                    console.log("played green voice")
+                }
+            }
+
+             document.querySelectorAll('.sound_element')[i].addEventListener("click", play_sound);
+            }
+         
+    }
+
+    function assign_sound_only(category_list, hmong_type, i){
         let sound_category = category_list.flashcard_name;
         let sound_name = category_list.english[running_shuffle[i]];
-    
-        let audio_link = "sounds/" + sound_category + "/"  + hmong_type + "/" + sound_name  + ".mp3";
-        console.log(audio_link)
-
-        document.querySelectorAll('.sound_element')[i].addEventListener("click", function() {
+        
+        let audio_link_white = "sounds/" + sound_category + "/"  + "white" + "/" + sound_name  + ".mp3";
+        let audio_link_green = "sounds/" + sound_category + "/"  + "green" + "/" + sound_name  + ".mp3";
+        if (hmong_type=="white"){
             // console.log("added click function to" + String(i));
-            let voice_recording = new Audio(audio_link);
+            let voice_recording_white = new Audio(audio_link_white);
             // console.log(audio_link)
-            voice_recording.play();
-        });
-
+            voice_recording_white.play();
+            console.log("played white voice")
+        } 
+        if (hmong_type == "green"){
+            // console.log("added click function to" + String(i));
+            let voice_recording_green = new Audio(audio_link_green);
+            // console.log(audio_link)
+            voice_recording_green.play();
+            console.log("played green voice")
         }
     }
+    
 
     function card_function(){
         var shuffle_button = document.getElementsByClassName("shuffle_button")[0];
@@ -660,10 +708,6 @@
 
     }
 
-    let hmong_type = ""
-    let running_flashcard = {};
-    let hmong_color = "";
-    var running_shuffle = [];
     
     let animals = {
     english:["bear", "bull", "cat", "chicken", "cow", "deer", "duck", "elephant", "fox", "goat", "hen", "horse", "lion", "monkey"],
@@ -708,17 +752,17 @@
         if (category_name == 'animals'){
             running_flashcard = animals;
             running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
-            running_shuffle = shuffleArray(running_shuffle);
+            // running_shuffle = shuffleArray(running_shuffle);
         }
         if (category_name == 'colors'){
             running_flashcard = colors;
             running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
-            running_shuffle = shuffleArray(running_shuffle);
+            // running_shuffle = shuffleArray(running_shuffle);
         }
         if (category_name == 'numbers'){
             running_flashcard = numbers;
             running_shuffle = Array.apply(null, Array(running_flashcard.english.length)).map(function (x, i) { return i; });
-            running_shuffle = shuffleArray(running_shuffle);
+            // running_shuffle = shuffleArray(running_shuffle);
         }
         for (let z = 0; z < flashcards.length; z++) {
           flashcards[z].onclick = function() {
@@ -726,8 +770,9 @@
               flashcard_containers.classList.remove("display_hide");
               console.log("outside should be hidden")
               modal.style.display = "none";
-              hmong_color = "white";
-              create_card_sound(running_flashcard, "white");
+              let current_hmong_color = hmong_type;
+              create_card_sound(running_flashcard, current_hmong_color);
+              new_flashcard = 1;
           }
 
           match[z].onclick = function() {
@@ -745,12 +790,38 @@
      function create_card_sound(category_list, hmong_type){
 
         let card_str = create_card(category_list, hmong_type);
+        let card_str2 = create_card_after(category_list, hmong_type);
+        let prior_active = swiper.activeIndex; 
+
+        // if (new_flashcard == 0){
+        //         if (document.querySelector(".card-container")) {
+        //         // console.log('category already exist');
+        //         remove_category("card-container");
+        //         document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
+        //         enable_code = 1
+        //     } else {
+        //         // console.log('category does not exist')
+        //         document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
+        //         enable_code = 1
+        //     }
+        // } else{
+        //     if (document.querySelector(".card_box")) {
+        //         // console.log('category already exist');
+        //         remove_category("card_box");
+        //         document.querySelector(".swiper").insertAdjacentHTML('afterend', card_str2);
+        //         enable_code = 1
+        //     } else {
+        //         // console.log('category does not exist')
+        //         document.querySelector(".swiper").insertAdjacentHTML('afterend', card_str2);
+        //         enable_code = 1
+        //     }
+        // }
 
         if (document.querySelector(".card-container")) {
-            // console.log('category already exist');
-            remove_category("card-container");
-            document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
-            enable_code = 1
+                // console.log('category already exist');
+                remove_category("card-container");
+                document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
+                enable_code = 1
         } else {
             // console.log('category does not exist')
             document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
@@ -758,9 +829,17 @@
         }
 
 
+
         console.log(card_str);
         create_sound(category_list, hmong_type);
+        // if (new_flashcard == 1){
+        //     console.log("keep same");
+        //     swiperjs();
+        // } else {
+        //     swiperjs();
+        // }
         swiperjs();
+        
         card_function();
    
      }
@@ -781,17 +860,49 @@
             let swiper4 = '<div class="swiper-slide flex-row card_container sound_element"><h6 class="page_font">' + [i+1] +"/" + category_list.english.length + '</h6>'
             let swiper5 = '<img class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[running_shuffle[i]] + '.png"><div class="container">'
             let swiper6 = ''
+
+            if (hmong_type == "white") {
+                    swiper6 = '<h2 class="hmong_translation"><b>' + category_list.white[running_shuffle[i]] + '</b></h2>';
+                }
+            else{
+                swiper6 = '<h2 class="hmong_translation"><b>' + category_list.green[running_shuffle[i]] + '</b></h2>';
+            }
+            
+            let swiper7 = '<p class="english_translation">' + category_list.english[running_shuffle[i]] + '</p></div> </div>';
+            running_swiper = swiper4 + swiper5 + swiper6 + swiper7
+            swiper4_7 = swiper4_7.concat(running_swiper);
+        }
+        let swiper8 = '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div></div><div class="flex_row_80"><button id="back" class="back"><i class="fa fa-long-arrow-left" style="font-size:36px"></i></i></button><button id="shuffle_button" class="shuffle_button"><i class="fa fa-refresh" style="font-size:36px;"></i></button><button id="help_button" class="help_button"><i class="fa fa-keyboard-o" style="font-size:36px"></i></button></div></div></div>'
+        let final_str = swiper1 + swiper2 + swiper3 + swiper4_7 + swiper8
+        return final_str 
+    }
+
+    function create_card_after(category_list, hmong_type) {
+        var category_name = document.getElementsByClassName("category_name")[0];
+        let swiper1 = ''
+        let swiper2 = ''
+        let swiper3 = '<div class="swiper mySwiper"><div class="swiper-wrapper card_box">'
+
+        let running_swiper = ''
+        let swiper4_7 = '';
+
+        for (let i = 0; i < category_list.white.length; i++) {
+            let swiper4 = '<div class="swiper-slide flex-row card_container sound_element"><h6 class="page_font">' + [i+1] +"/" + category_list.english.length + '</h6>'
+            let swiper5 = '<img class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[running_shuffle[i]] + '.png"><div class="container">'
+            let swiper6 = ''
+
             if (hmong_type == "white") {
                     swiper6 = '<h2><b>' + category_list.white[running_shuffle[i]] + '</b></h2>';
                 }
                 else{
                     swiper6 = '<h2><b>' + category_list.green[running_shuffle[i]] + '</b></h2>';
                 }
+            
             let swiper7 = '<p>' + category_list.english[running_shuffle[i]] + '</p></div> </div>';
             running_swiper = swiper4 + swiper5 + swiper6 + swiper7
             swiper4_7 = swiper4_7.concat(running_swiper);
         }
-        let swiper8 = '</div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div></div><div class="flex_row_80"><button id="back" class="back"><i class="fa fa-long-arrow-left" style="font-size:36px"></i></i></button><button id="shuffle_button" class="shuffle_button"><i class="fa fa-refresh" style="font-size:36px;"></i></button><button id="help_button" class="help_button"><i class="fa fa-keyboard-o" style="font-size:36px"></i></button></div></div></div>'
+        let swiper8 = '</div>'
         let final_str = swiper1 + swiper2 + swiper3 + swiper4_7 + swiper8
         return final_str 
     }
@@ -811,16 +922,33 @@
 
         checkbox.addEventListener('change', function () {
             if (checkbox.checked) {
-                current_word = word_container[swiper.activeIndex]
-                current_word.style.color = "gray"
-                console.log('Checkedeee');
-                create_card_sound(running_flashcard, "green");
+                hmong_type = "green"
+                let hmong_translation = document.getElementsByClassName("hmong_translation");
+                let english_translation = document.getElementsByClassName("english_translation");
+                for (let i = 0; i < running_flashcard.green.length; i++) {
+                    document.querySelectorAll('.sound_element')[i].onclick = function(){
+                        assign_sound_only(running_flashcard, hmong_type, i);
+                        console.log("toggle white voice");
+                    }
+                    hmong_translation[i].innerHTML = "<b>" + running_flashcard.green[running_shuffle[i]] + "</b>"
+                    english_translation[i].innerHTML = running_flashcard.english[running_shuffle[i]]
+                }
+                
+                // create_sound(running_flashcard, hmong_type);
             } else {
-                current_word = word_container[swiper.activeIndex]
-                current_word.style.color = "teal"
-                console.log('Not checkedss');
-                create_card_sound(running_flashcard, "white");
-            }
+                hmong_type = "white"
+                let hmong_translation = document.getElementsByClassName("hmong_translation");
+                let english_translation = document.getElementsByClassName("english_translation");
+                for (let i = 0; i < running_flashcard.white.length; i++) {
+                    document.querySelectorAll('.sound_element')[i].onclick = function(){
+                        assign_sound_only(running_flashcard, hmong_type, i);
+                        console.log("toggle green voice");
+                    }
+                    hmong_translation[i].innerHTML = "<b>" + running_flashcard.white[running_shuffle[i]] +"</b>"
+                    english_translation[i].innerHTML = running_flashcard.english[running_shuffle[i]]
+                }
+                // create_sound(running_flashcard, hmong_type);
+                }
         });
     });
 
@@ -828,21 +956,9 @@
     var checkbox = document.querySelector('input[type="checkbox"]');
 
 
-    for (let i = 0; i < card_containers.length; i++) {
-        card_containers[i].onclick = function() {
-            let sound_category = "animals";
-            let sound_name = "bear";
-            let hmong_type = "white";
-            let audio_link = "sounds/" + sound_category + "/"  + hmong_type + "/" + sound_name  + ".mp3";
-            let voice_recording = new Audio(audio_link);
-            // console.log(audio_link)
-            voice_recording.play();
-        }
-    }
-
-
-    let enable_code = 1
-    let page_card = 1
+    let enable_code = 1;
+    let page_card = 1;
+    // let current_page = swiper.activeIndex;
     keyNavigation();
     swiperjs();
 
@@ -860,27 +976,64 @@
 
     }
 
+    function fake_function(){
+        console.log('fake function')
+    }
+
     function keyAction(key) {
 
     switch (key) {
 
     case "w":
+        shuffled = 1;
+
         if (checkbox.checked == true){
+            hmong_type = "white"
+            let hmong_translation = document.getElementsByClassName("hmong_translation");
+            let english_translation = document.getElementsByClassName("english_translation");
+            function fake_function(){
+                console.log('fake function')
+            }
+            for (let i = 0; i < running_flashcard.white.length; i++) {
+                // console.log(i)
+                document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", "fake_function();");
+                // document.querySelectorAll('.sound_element')[i].onclick = function(){
+                //     assign_sound_only(running_flashcard, hmong_type, i);
+                //     console.log("white voice pressed w");
+                // }
+                hmong_translation[i].innerHTML = "<b>" + running_flashcard.white[running_shuffle[i]] +"</b>"
+                english_translation[i].innerHTML = running_flashcard.english[running_shuffle[i]]
+            }
             // current_word = word_container[swiper.activeIndex]
             checkbox.checked = false;
             console.log("button pressed w",current_word)
             // current_word.style.color = "blue"
-            create_card_sound(running_flashcard, "white");
+            
+            // create_sound(running_flashcard, hmong_type);
         }
         break;
 
     case "g":
+        shuffled = 1;
         if (checkbox.checked == false){
+            hmong_type = "green"
+            let hmong_translation = document.getElementsByClassName("hmong_translation");
+            let english_translation = document.getElementsByClassName("english_translation");
+            for (let i = 0; i < running_flashcard.green.length; i++) {
+                document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", "fake_function();");
+                // document.querySelectorAll('.sound_element')[i].onclick = function(){
+                //     assign_sound_only(running_flashcard, hmong_type, i);
+                //     console.log("green voice  pressed g");
+                // }
+                hmong_translation[i].innerHTML = "<b>" + running_flashcard.green[running_shuffle[i]] + "</b>"
+                english_translation[i].innerHTML = running_flashcard.english[running_shuffle[i]]
+            }
             // current_word = word_container[swiper.activeIndex]
             checkbox.checked = true;
             console.log("button pressed g",current_word)
             // current_word.style.color = "green"
-            create_card_sound(running_flashcard, "green");
+            
+            // create_sound(running_flashcard, hmong_type);
         }
         break;
 
@@ -889,6 +1042,7 @@
         outside.classList.remove("display_hide");
         entire_flashcards.classList.add("display_hide");
         enable_code = 0;
+        shuffled = 0;
         break;
 
     // case "z":
@@ -913,6 +1067,7 @@
         break;
 
     case "s":
+        shuffle = 1; 
         running_shuffle = shuffleArray(running_shuffle);
         create_card_sound(running_flashcard, hmong_type);
         break;
