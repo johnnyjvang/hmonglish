@@ -650,14 +650,13 @@
             let voice_recording_white = new Audio(audio_link_white);
             // console.log(audio_link)
             voice_recording_white.play();
-            console.log("played white voice")
-        } 
-        if (hmong_type == "green"){
+            console.log("set attribute - white voice")
+        } else{
             // console.log("added click function to" + String(i));
             let voice_recording_green = new Audio(audio_link_green);
             // console.log(audio_link)
             voice_recording_green.play();
-            console.log("played green voice")
+            console.log("set attribute - green voice")
         }
     }
     
@@ -793,30 +792,6 @@
         let card_str2 = create_card_after(category_list, hmong_type);
         let prior_active = swiper.activeIndex; 
 
-        // if (new_flashcard == 0){
-        //         if (document.querySelector(".card-container")) {
-        //         // console.log('category already exist');
-        //         remove_category("card-container");
-        //         document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
-        //         enable_code = 1
-        //     } else {
-        //         // console.log('category does not exist')
-        //         document.querySelector(".nav_container").insertAdjacentHTML('afterend', card_str);
-        //         enable_code = 1
-        //     }
-        // } else{
-        //     if (document.querySelector(".card_box")) {
-        //         // console.log('category already exist');
-        //         remove_category("card_box");
-        //         document.querySelector(".swiper").insertAdjacentHTML('afterend', card_str2);
-        //         enable_code = 1
-        //     } else {
-        //         // console.log('category does not exist')
-        //         document.querySelector(".swiper").insertAdjacentHTML('afterend', card_str2);
-        //         enable_code = 1
-        //     }
-        // }
-
         if (document.querySelector(".card-container")) {
                 // console.log('category already exist');
                 remove_category("card-container");
@@ -829,20 +804,17 @@
         }
 
 
-
         console.log(card_str);
-        create_sound(category_list, hmong_type);
-        // if (new_flashcard == 1){
-        //     console.log("keep same");
-        //     swiperjs();
-        // } else {
-        //     swiperjs();
-        // }
+        // create_sound(category_list, hmong_type);
         swiperjs();
-        
         card_function();
    
      }
+
+
+    function originalFunction(){
+        console.log("i am the orignal")
+    }
 
 
      function create_card(category_list, hmong_type) {
@@ -855,9 +827,10 @@
 
         let running_swiper = ''
         let swiper4_7 = '';
-
+        
         for (let i = 0; i < category_list.white.length; i++) {
-            let swiper4 = '<div class="swiper-slide flex-row card_container sound_element"><h6 class="page_font">' + [i+1] +"/" + category_list.english.length + '</h6>'
+            let running_sound_function = "assign_sound_only(running_flashcard, hmong_type," + i + ")"
+            let swiper4 = '<div class="swiper-slide flex-row card_container sound_element" onclick="' + running_sound_function + '"><h6 class="page_font">' + [i+1] +"/" + category_list.english.length + '</h6>'
             let swiper5 = '<img class="card_image" src="images/' + category_list.flashcard_name + '/' + category_list.english[running_shuffle[i]] + '.png"><div class="container">'
             let swiper6 = ''
 
@@ -926,10 +899,8 @@
                 let hmong_translation = document.getElementsByClassName("hmong_translation");
                 let english_translation = document.getElementsByClassName("english_translation");
                 for (let i = 0; i < running_flashcard.green.length; i++) {
-                    document.querySelectorAll('.sound_element')[i].onclick = function(){
-                        assign_sound_only(running_flashcard, hmong_type, i);
-                        console.log("toggle white voice");
-                    }
+                    let running_function = "assign_sound_only(running_flashcard, hmong_type," + i + ")"
+                    document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", running_function);
                     hmong_translation[i].innerHTML = "<b>" + running_flashcard.green[running_shuffle[i]] + "</b>"
                     english_translation[i].innerHTML = running_flashcard.english[running_shuffle[i]]
                 }
@@ -940,10 +911,8 @@
                 let hmong_translation = document.getElementsByClassName("hmong_translation");
                 let english_translation = document.getElementsByClassName("english_translation");
                 for (let i = 0; i < running_flashcard.white.length; i++) {
-                    document.querySelectorAll('.sound_element')[i].onclick = function(){
-                        assign_sound_only(running_flashcard, hmong_type, i);
-                        console.log("toggle green voice");
-                    }
+                    let running_function = "assign_sound_only(running_flashcard, hmong_type," + i + ")"
+                    document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", running_function);
                     hmong_translation[i].innerHTML = "<b>" + running_flashcard.white[running_shuffle[i]] +"</b>"
                     english_translation[i].innerHTML = running_flashcard.english[running_shuffle[i]]
                 }
@@ -996,7 +965,9 @@
             }
             for (let i = 0; i < running_flashcard.white.length; i++) {
                 // console.log(i)
-                document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", "fake_function();");
+                // assign_sound_only(category_list, hmong_type, i)
+                let running_function = "assign_sound_only(running_flashcard, hmong_type," + i + ")"
+                document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", running_function);
                 // document.querySelectorAll('.sound_element')[i].onclick = function(){
                 //     assign_sound_only(running_flashcard, hmong_type, i);
                 //     console.log("white voice pressed w");
@@ -1020,7 +991,8 @@
             let hmong_translation = document.getElementsByClassName("hmong_translation");
             let english_translation = document.getElementsByClassName("english_translation");
             for (let i = 0; i < running_flashcard.green.length; i++) {
-                document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", "fake_function();");
+                let running_function = "assign_sound_only(running_flashcard, hmong_type," + i + ")"
+                document.querySelectorAll('.sound_element')[i].setAttribute( "onClick", running_function);
                 // document.querySelectorAll('.sound_element')[i].onclick = function(){
                 //     assign_sound_only(running_flashcard, hmong_type, i);
                 //     console.log("green voice  pressed g");
