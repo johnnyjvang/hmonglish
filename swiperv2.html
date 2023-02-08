@@ -249,6 +249,60 @@
             height: 50px;
         }
 
+        .green_white_cards{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            /* justify-content: space-around; */
+            width: 80%;
+            background-color: blue;
+            /* margin: auto; */
+        }
+
+        .sound_button{
+            height: 150px;
+            width: 300px;
+            background-color: chocolate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        .column {
+            margin: 10px;
+            background-color: #36454F;
+            color: white;
+            min-width: 150px;
+            height: 150px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+
+
+        @media (min-width: 1080px) {
+            .columns {
+                flex-wrap: nowrap;
+            }
+        }
+
+
+        .column:hover {
+            transform: scale(1.00);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+            opacity: 80%;
+        }
+        .column {
+            transition: 0.5s ease;
+            cursor: pointer;
+            margin:10px;
+        }
+
 
       </style>
 
@@ -382,40 +436,29 @@
         <div class="cards grid-ish">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper card_box">
+
                     <div class="swiper-slide flex-row card_container">
 
                         <h6 class="card_count">1/2</h6>
+                        <div>
+                            <img class="" src="https://mms.businesswire.com/media/20210202005179/en/856219/23/01_3D_Kirby_Normal_11.jpg">
+                            <p>English Word</p>
+                        </div>
+                        
 
-                        <div class="flex-row">
-                            <div class="button_containers">
-                                <img class="card_image" src="https://cdn.vox-cdn.com/thumbor/OviKJXjiLwSjgXdBMzj5uf8QzUU=/0x0:2192x1132/1400x1050/filters:focal(1096x566:1097x567)/cdn.vox-cdn.com/uploads/chorus_asset/file/23761514/kirby_dream_buffet.png">
-                                <div class="container">
-                                    <h2><b>Hmong Word</b></h2>
-                                    <p>English Word</p>
-                                </div>
+                        <div class="green_white_cards">
+                            <div class="sound_button column">
+                                <h2><b>White Hmong Word</b></h2>
                             </div>
     
-                            <div class="flex_row_different button_containers">
-                                <div>
-                                    <img class="card_image" src="https://cdn.vox-cdn.com/thumbor/OviKJXjiLwSjgXdBMzj5uf8QzUU=/0x0:2192x1132/1400x1050/filters:focal(1096x566:1097x567)/cdn.vox-cdn.com/uploads/chorus_asset/file/23761514/kirby_dream_buffet.png">
-                                    <div class="container">
-                                        <h2><b>Hmong Word</b></h2>
-                                        <p>English Word</p>
-                                    </div>
-                                </div>
-        
-                                <div>
-                                    <img class="card_image" src="https://cdn.vox-cdn.com/thumbor/OviKJXjiLwSjgXdBMzj5uf8QzUU=/0x0:2192x1132/1400x1050/filters:focal(1096x566:1097x567)/cdn.vox-cdn.com/uploads/chorus_asset/file/23761514/kirby_dream_buffet.png">
-                                    <div class="container">
-                                        <h2><b>Hmong Word</b></h2>
-                                        <p>English Word</p>
-                                    </div>
-                                </div>
+                            <div class="sound_button column">
+                                <h2><b>Green Hmong Word</b></h2>
                             </div>
                         </div>
 
 
                     </div>
+
                     <div class="swiper-slide flex-row card_container">
                         <h6>1/2</h6>
                         <img class="card_image" src="https://www.giantbomb.com/a/uploads/original/14/149329/2311703-1000px_wikia_visualization_add_6.png">
