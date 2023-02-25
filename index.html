@@ -760,6 +760,12 @@
         }
     }
 
+    window.addEventListener("touchstart", handlerFunction, false);
+
+    function handlerFunction(event) {
+        alert('you touched the screen');
+    }
+
   
     var entire_flashcards = document.getElementsByClassName("flashcard_container")[0];
     // var flashcard_container_js = getElementsByClassName("flashcard_container");
