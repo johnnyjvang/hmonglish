@@ -880,6 +880,7 @@
 
         back_button.onclick = function() {
             if (document.querySelector(".card-container")) {
+            body.style.overflow = "auto";
             console.log('category already exist');
             enable_code = 0;
             outside.classList.remove("display_hide");
@@ -975,6 +976,7 @@
           }
 
           starts[z].onclick = function() {
+            body.style.overflow = "hidden";
             if (flashcards[z].classList.contains('active')){
                 outside.classList.add("display_hide");
                 flashcards[z].classList.remove("active");
@@ -1237,6 +1239,7 @@
 
 
     case "b":
+        body.style.overflow = "auto";
         outside.classList.remove("display_hide");
         entire_flashcards.classList.add("display_hide");
         enable_code = 0;
