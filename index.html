@@ -120,13 +120,13 @@
 
         .card_box{
             width: 1200px;
-            max-height: 75vh;
+            max-height: 70vh;
             /* padding: 0px 0px 20px 0px; */
             /* background-color: green; */
         }
 
         .card_image{
-            height: 50vh;
+            height: 40vh;
             /* max-width: 300px;
             max-height: 300px; */
         /* max-width: 35vw; */
@@ -151,31 +151,7 @@
             font-size: 40px;
         }
 
-        @media only screen and (orientation: portrait) {
 
-
-        }
-
-        @media only screen and (orientation: landscape) {
-            .container{
-                /* height: 10vh; */
-                line-height: 1;
-                margin: -20px 0px 40px 0;
-                /* background-color: chocolate; */
-            }
-            .container h2{
-                font-size: 35px;
-            }
-
-            .container p{
-                font-size: 25px;
-            }
-
-            .card_image{
-            height: 40vh;
-            }
-
-        }
 
         /* The switch - the box around the slider */
         .switch {
@@ -266,7 +242,7 @@
         justify-content: space-between;
         flex-direction: row;
         max-width: 100vw;
-        height: 15vh;
+        height: 10vh;
         background-color: #167D7F;
         /* background-color: #36454F; */
         }
@@ -575,10 +551,49 @@
             display: none;
         }
 
-        .ten_vh{
-            height: 15vh;
+        @media only screen and (orientation: portrait) {
+
+
         }
 
+        @media only screen and (orientation: landscape) {
+            .container{
+                /* height: 10vh; */
+                line-height: 1;
+                margin: -20px 0px 40px 0;
+                /* background-color: chocolate; */
+            }
+
+            .card_box{
+                width: 1200px;
+                max-height: 75vh;
+                /* padding: 0px 0px 20px 0px; */
+                /* background-color: green; */
+            }
+
+            .flex_row_80_15{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+                max-width: 100vw;
+                height: 15vh;
+                background-color: #167D7F;
+                /* background-color: #36454F; */
+                }
+            .container h2{
+                font-size: 35px;
+            }
+
+            .container p{
+                font-size: 25px;
+            }
+
+            .card_image{
+            height: 40vh;
+            }
+
+        }
         
 
       </style>
