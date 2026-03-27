@@ -14,6 +14,40 @@ The project emphasizes usability, accessibility, and interactive learning throug
 
 ---
 
+## Application Demo
+
+### Homepage
+
+<p align="center">
+  <img src="public/homepage.png" width="600">
+</p>
+
+---
+
+### Category Selection
+
+<p align="center">
+  <img src="public/homepage2.png" width="600">
+</p>
+
+---
+
+### Flashcard Mode
+
+<p align="center">
+  <img src="public/flashcard.png" width="500">
+</p>
+
+---
+
+### Keyboard Controls Guide
+
+<p align="center">
+  <img src="public/keyboard_info.png" width="500">
+</p>
+
+---
+
 ## Features
 
 - Category-based learning (Animals, Colors, Numbers)
